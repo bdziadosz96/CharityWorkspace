@@ -1,9 +1,9 @@
 package pl.dziadosz.fundsmicroservice.domain.fundraiser.service;
 
 import lombok.RequiredArgsConstructor;
-import pl.dziadosz.fundsmicroservice.domain.fundraiser.model.FundraiseWithdrawalResponse;
-import pl.dziadosz.fundsmicroservice.domain.fundraiser.model.FundraiserEvent;
-import pl.dziadosz.fundsmicroservice.domain.fundraiser.model.FundraiserWithdrawal;
+import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiseWithdrawalResponse;
+import pl.dziadosz.fundsmicroservice.domain.fundraiser.FundraiserEvent;
+import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserWithdrawal;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.port.out.FundraiserWebPort;
 
 @RequiredArgsConstructor

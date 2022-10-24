@@ -1,4 +1,4 @@
-package pl.dziadosz.fundsmicroservice.domain.fundraiser.model;
+package pl.dziadosz.fundsmicroservice.domain.fundraiser.view;
 
 import java.math.BigDecimal;
 

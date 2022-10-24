@@ -1,4 +1,4 @@
-package pl.dziadosz.fundsmicroservice.domain.fundraiser.model;
+package pl.dziadosz.fundsmicroservice.domain.fundraiser;
 
 public enum FundraiserEventType {
     WITHDRAWAL("withdrawal"),

@@ -1,10 +1,10 @@
 package pl.dziadosz.fundsmicroservice.infrastructure.persistence.database.fundraiser;
 
-import java.util.List;
+import java.math.BigDecimal;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import pl.dziadosz.fundsmicroservice.domain.fundraiser.model.Fundraiser;
-import pl.dziadosz.fundsmicroservice.domain.fundraiser.model.FundraiserEvent;
+import pl.dziadosz.fundsmicroservice.domain.fundraiser.Fundraiser;
+import pl.dziadosz.fundsmicroservice.domain.fundraiser.FundraiserEvent;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.port.out.FundraiserRepositoryPort;
 import pl.dziadosz.fundsmicroservice.infrastructure.persistence.database.fundraiser.entity.FundraiserEntity;
 import pl.dziadosz.fundsmicroservice.infrastructure.persistence.database.fundraiser.entity.FundraiserEventEntity;
@@ -17,18 +17,6 @@ public class FundraiserDatabaseAdapter implements FundraiserRepositoryPort {
     private final FundraiserEventRepository fundraiserEventRepository;
 
     @Override
-    public List<Fundraiser> findAll() {
-        return fundraiserRepository.findAll()
-                .stream()
-                .map(entity -> new Fundraiser(
-                        entity.getId(),
-                        entity.getAccountId(),
-                        entity.getName(),
-                        entity.getBalance()
-                )).toList();
-    }
-
-    @Override
     public Optional<Fundraiser> findFundraiserWithAccountId(final Long fundraiserId, final Long accountId) {
         return fundraiserRepository
                 .findByIdAndAccountId(fundraiserId, accountId)
@@ -36,6 +24,17 @@ public class FundraiserDatabaseAdapter implements FundraiserRepositoryPort {
                         entity.getAccountId(),
                         entity.getName(),
                         entity.getBalance()));
+    }
+
+    @Override
+    public BigDecimal findWithdrawalSummary(final Long fundraiserId) {
+        return fundraiserEventRepository.findWithdrawalSummaryFor(fundraiserId)
+                .orElse(BigDecimal.ZERO);
+    }
+
+    @Override
+    public BigDecimal findDepositSummary(final Long fundraiserId) {
+        return null;
     }
 
     @Override

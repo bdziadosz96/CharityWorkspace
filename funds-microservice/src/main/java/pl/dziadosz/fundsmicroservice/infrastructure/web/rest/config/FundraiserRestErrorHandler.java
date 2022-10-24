@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResponseErrorHandler;
-import pl.dziadosz.fundsmicroservice.infrastructure.application.exception.InterruptedWithdrawalProcessException;
+import pl.dziadosz.fundsmicroservice.domain.exception.InternalWithdrawalProcessException;
 
 @Component
 public class FundraiserRestErrorHandler implements ResponseErrorHandler {
@@ -20,10 +20,10 @@ public class FundraiserRestErrorHandler implements ResponseErrorHandler {
     public void handleError(final ClientHttpResponse response) throws IOException {
         if (response.getStatusCode()
                 .series() == HttpStatus.Series.SERVER_ERROR) {
-            throw new InterruptedWithdrawalProcessException(response.getStatusText());
+            throw new InternalWithdrawalProcessException(response.getStatusText());
         } else if (response.getStatusCode()
                 .series() == HttpStatus.Series.CLIENT_ERROR) {
-            throw new InterruptedWithdrawalProcessException(response.getStatusText());
+            throw new InternalWithdrawalProcessException(response.getStatusText());
         }
     }
 }
