@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import pl.dziadosz.fundsmicroservice.domain.exception.IncorrectWithdrawalAmountException;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.Fundraiser;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserDeposit;
-import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserModel;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserWithdrawal;
 
 public class FundraiserCashService {
