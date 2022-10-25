@@ -8,11 +8,11 @@ import pl.dziadosz.fundsmicroservice.infrastructure.persistence.database.fundrai
 
 public interface FundraiserEventRepository extends JpaRepository<FundraiserEventEntity, String> {
     @Query("select sum(f.amount) from FundraiserEventEntity f where f.accountId = ?1 and " +
-            "f.eventType = pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserEventTypeModel.WITHDRAWAL")
+            "f.eventType = pl.dziadosz.fundsmicroservice.domain.fundraiser.FundraiserEventType.WITHDRAWAL")
     Optional<BigDecimal> findWithdrawalSummaryFor(Long id);
 
     @Query("select sum(f.amount) from FundraiserEventEntity f where f.accountId = ?1 and " +
-            "f.eventType = pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserEventTypeModel.DEPOSIT")
+            "f.eventType = pl.dziadosz.fundsmicroservice.domain.fundraiser.FundraiserEventType.DEPOSIT")
     Optional<BigDecimal> findDepositSummaryFor(Long id);
 
     @Query("select f from FundraiserEventEntity f where f.accountId = ?1")

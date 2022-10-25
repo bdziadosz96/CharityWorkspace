@@ -20,11 +20,11 @@ public class FundraiserCashService {
         return new Fundraiser(fundraiser.getId(), fundraiser.getAccountId(), fundraiser.getName(), newAmount);
     }
 
-    public FundraiserModel makeDeposit(final FundraiserModel fundraiser, final FundraiserDeposit fundraiserDeposit) {
+    public Fundraiser makeDeposit(final Fundraiser fundraiser, final FundraiserDeposit fundraiserDeposit) {
         BigDecimal amountToDeposit = fundraiserDeposit.amount();
         BigDecimal newAmount = fundraiser
-                .balance()
+                .getBalance()
                 .add(amountToDeposit);
-        return new FundraiserModel(fundraiser.id(), fundraiser.accountId(), fundraiser.name(), newAmount);
+        return new Fundraiser(fundraiser.getId(), fundraiser.getAccountId(), fundraiser.getName(), newAmount);
     }
 }

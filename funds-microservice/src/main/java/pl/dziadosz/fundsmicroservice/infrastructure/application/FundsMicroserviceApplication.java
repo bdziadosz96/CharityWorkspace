@@ -21,37 +21,37 @@ import pl.dziadosz.fundsmicroservice.infrastructure.persistence.database.fundrai
 @EnableJpaRepositories(basePackages = {"pl.dziadosz.fundsmicroservice.infrastructure.persistence.database"})
 @EntityScan(basePackages = "pl.dziadosz.fundsmicroservice.infrastructure.persistence.database")
 @ComponentScan(basePackages = {"pl.dziadosz.fundsmicroservice.infrastructure"})
-public class FundsMicroserviceApplication implements CommandLineRunner {
+public class FundsMicroserviceApplication {
 
-    @Autowired
-    private FundraiserRepository repository;
-
-    @Autowired
-    private FundraiserEventRepository eventRepository;
+//    @Autowired
+//    private FundraiserRepository repository;
+//
+//    @Autowired
+//    private FundraiserEventRepository eventRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(FundsMicroserviceApplication.class, args);
     }
 
-    @Override
-    public void run(final String... args) {
-        FundraiserEntity save = repository.save(
-                FundraiserEntity.builder()
-                        .accountId(1L)
-                        .balance(BigDecimal.TEN)
-                        .name("hospital-charity")
-                        .build()
-        );
-
-        FundraiserEventEntity event = new FundraiserEventEntity(UUID.randomUUID().toString(),
-                1L,1L,BigDecimal.ONE, FundraiserEventType.WITHDRAWAL);
-
-        FundraiserEventEntity event2 = new FundraiserEventEntity(UUID.randomUUID().toString(),
-                1L,1L,BigDecimal.TEN, FundraiserEventType.WITHDRAWAL);
-
-
-        eventRepository.saveAll(List.of(event2, event));
-
-        System.out.println(eventRepository.findWithdrawalSummaryFor(save.getId()));
-    }
+//    @Override
+//    public void run(final String... args) {
+//        FundraiserEntity save = repository.save(
+//                FundraiserEntity.builder()
+//                        .accountId(1L)
+//                        .balance(BigDecimal.TEN)
+//                        .name("hospital-charity")
+//                        .build()
+//        );
+//
+//        FundraiserEventEntity event = new FundraiserEventEntity(UUID.randomUUID().toString(),
+//                1L,1L,BigDecimal.ONE, FundraiserEventType.WITHDRAWAL);
+//
+//        FundraiserEventEntity event2 = new FundraiserEventEntity(UUID.randomUUID().toString(),
+//                1L,1L,BigDecimal.TEN, FundraiserEventType.WITHDRAWAL);
+//
+//
+//        eventRepository.saveAll(List.of(event2, event));
+//
+//        System.out.println(eventRepository.findWithdrawalSummaryFor(save.getId()));
+//    }
 }

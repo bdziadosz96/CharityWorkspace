@@ -24,20 +24,20 @@ public class FundraiserController {
     private final FundraiserWithdrawalPort withdrawalPort;
     private final FundraiserInformationPort informationPort;
 
-    @PostMapping
+    @PostMapping("withdraw")
     public FundraiserEventDto withdraw(@RequestBody FundraiserWithdrawalDto fundraiserWithdrawalDto) {
         FundraiserWithdrawal fundraiserWithdrawal = MAPPER.withdrawalDtoToModel(fundraiserWithdrawalDto);
         FundraiserEventModel withdraw = withdrawalPort.withdraw(fundraiserWithdrawal);
         return MAPPER.eventModelToDto(withdraw);
     }
 
-    @PostMapping
+    @PostMapping("deposit")
     public FundraiserEventDto deposit(@RequestBody FundraiserDepositDto fundraiserDepositDto) {
         FundraiserEventModel deposit = depositPort.deposit(MAPPER.depositDtoModel(fundraiserDepositDto));
         return MAPPER.eventModelToDto(deposit);
     }
 
-    @GetMapping("/information/{fundraiserId}")
+    @GetMapping("information/{fundraiserId}")
     public FundraiserInformationModel information(@PathVariable final Long fundraiserId) {
         return informationPort.findTransactions(fundraiserId);
     }

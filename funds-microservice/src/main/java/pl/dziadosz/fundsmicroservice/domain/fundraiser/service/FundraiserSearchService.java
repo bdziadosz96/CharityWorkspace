@@ -3,10 +3,9 @@ package pl.dziadosz.fundsmicroservice.domain.fundraiser.service;
 import lombok.RequiredArgsConstructor;
 import pl.dziadosz.fundsmicroservice.domain.exception.FundraiserNotFoundException;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.Fundraiser;
-import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserDeposit;
-import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserModel;
-import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserWithdrawal;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.port.out.FundraiserRepositoryPort;
+import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserDeposit;
+import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserWithdrawal;
 
 @RequiredArgsConstructor
 public class FundraiserSearchService {
@@ -18,9 +17,9 @@ public class FundraiserSearchService {
                 .orElseThrow(() -> new FundraiserNotFoundException(String.format("Fundraise %s not found", withdrawal.fundraiserId())));
     }
 
-    public FundraiserModel findFundraiserForDeposit(FundraiserDeposit deposit) {
+    public Fundraiser findFundraiserForDeposit(FundraiserDeposit deposit) {
         return repositoryPort.findFundraiserById(deposit.fundraiserId())
-                .map(fund -> new FundraiserModel(fund.id(), fund.accountId(), fund.name(), fund.balance()))
+                .map(fund -> new Fundraiser(fund.id(), fund.accountId(), fund.name(), fund.balance()))
                 .orElseThrow(() -> new FundraiserNotFoundException(String.format("Fundraise %s not found", deposit.fundraiserId())));
     }
 }

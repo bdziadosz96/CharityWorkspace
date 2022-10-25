@@ -1,9 +1,9 @@
 package pl.dziadosz.fundsmicroservice.infrastructure.application.rest.fundraiser;
 
 import org.springframework.stereotype.Component;
+import pl.dziadosz.fundsmicroservice.domain.fundraiser.FundraiserEventType;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserDeposit;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserEventModel;
-import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserEventTypeModel;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserWithdrawal;
 
 @Component
@@ -32,6 +32,6 @@ public class FundraiserRestMapper {
 
     FundraiserEventModel eventDtoToModel(FundraiserEventDto dto) {
         return new FundraiserEventModel(dto.uuid(), dto.fundraiserId(), dto.accountId(),
-                dto.amount(), FundraiserEventTypeModel.fromDto(dto.eventTypeDto().getSymbol()));
+                dto.amount(), FundraiserEventType.fromDto(dto.eventTypeDto().getSymbol()));
     }
 }
