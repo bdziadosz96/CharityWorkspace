@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import pl.dziadosz.fundsmicroservice.domain.fundraiser.port.in.FundraiserDepositPort;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.port.in.FundraiserInformationPort;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserEventModel;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserInformationModel;
@@ -18,14 +19,22 @@ import pl.dziadosz.fundsmicroservice.domain.fundraiser.port.in.FundraiserWithdra
 @RequestMapping("fundraise")
 @RequiredArgsConstructor
 public class FundraiserController {
+    private final FundraiserRestMapper MAPPER;
+    private final FundraiserDepositPort depositPort;
     private final FundraiserWithdrawalPort withdrawalPort;
     private final FundraiserInformationPort informationPort;
 
     @PostMapping
     public FundraiserEventDto withdraw(@RequestBody FundraiserWithdrawalDto fundraiserWithdrawalDto) {
-        FundraiserWithdrawal fundraiserWithdrawal = FundraiseRestMapper.fundraiseToModel(fundraiserWithdrawalDto);
+        FundraiserWithdrawal fundraiserWithdrawal = MAPPER.withdrawalDtoToModel(fundraiserWithdrawalDto);
         FundraiserEventModel withdraw = withdrawalPort.withdraw(fundraiserWithdrawal);
-        return FundraiseRestMapper.eventToDto(withdraw);
+        return MAPPER.eventModelToDto(withdraw);
+    }
+
+    @PostMapping
+    public FundraiserEventDto deposit(@RequestBody FundraiserDepositDto fundraiserDepositDto) {
+        FundraiserEventModel deposit = depositPort.deposit(MAPPER.depositDtoModel(fundraiserDepositDto));
+        return MAPPER.eventModelToDto(deposit);
     }
 
     @GetMapping("/information/{fundraiserId}")

@@ -17,4 +17,9 @@ public class FundraiserSaveService {
     public FundraiserEvent saveFundraiserEvent(FundraiserEvent fundraiserEvent) {
         return fundraiserRepositoryPort.save(fundraiserEvent);
     }
+
+    public FundraiserEvent combineTransaction(Fundraiser fundraiser, FundraiserEvent fundraiserEvent) {
+        fundraiserRepositoryPort.save(fundraiser);
+        return fundraiserRepositoryPort.save(fundraiserEvent);
+    }
 }

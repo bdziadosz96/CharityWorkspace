@@ -1,6 +1,6 @@
 package pl.dziadosz.fundsmicroservice.domain.fundraiser.adapter;
 
-import pl.dziadosz.fundsmicroservice.domain.fundraiser.FundraiseMapper;
+import pl.dziadosz.fundsmicroservice.domain.fundraiser.FundraiserMapper;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.Fundraiser;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.FundraiserEvent;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserEventModel;
@@ -31,6 +31,6 @@ public class FundraiserWithdrawalAdapter implements FundraiserWithdrawalPort {
         Fundraiser actualFundraiser = cashService.makeWithdrawal(fundraiser, fundraiserWithdrawal);
         FundraiserEvent fundraiserEvent = withdrawalService.create(fundraiserWithdrawal);
         fundraiserSaveService.saveFundraiser(actualFundraiser);
-        return FundraiseMapper.toModel(fundraiserSaveService.saveFundraiserEvent(fundraiserEvent));
+        return FundraiserMapper.toModel(fundraiserSaveService.saveFundraiserEvent(fundraiserEvent));
     }
 }
