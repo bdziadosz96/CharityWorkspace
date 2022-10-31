@@ -3,7 +3,6 @@ package pl.dziadosz.fundsmicroservice.infrastructure.web.rest.fundraiser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiseWithdrawalResponse;
@@ -14,25 +13,24 @@ import pl.dziadosz.fundsmicroservice.domain.exception.InternalWithdrawalProcessE
 @RequiredArgsConstructor
 public class FundraiserWebAdapter implements FundraiserWebPort {
     private final RestTemplate restTemplate;
-    public static final String URI = "http://localhost:8081/fundraise";
+    public static final String WITHDRAWAL_SERVICE_URI = "http://localhost:8081/fundraise";
 
     @Override
     public FundraiseWithdrawalResponse makeWithdrawCall(final FundraiserWithdrawal fundraiserWithdrawal) {
 
         RequestEntity<FundraiserWithdrawal> request = constructRequest(fundraiserWithdrawal);
-        ResponseEntity<FundraiseWithdrawalResponse> response;
         try {
-            response = restTemplate
-                    .exchange(request, FundraiseWithdrawalResponse.class);
+            return restTemplate
+                    .exchange(request, FundraiseWithdrawalResponse.class)
+                    .getBody();
         } catch (ResourceAccessException e) {
             throw new InternalWithdrawalProcessException(e.getMessage());
         }
-        return response.getBody();
     }
 
     private RequestEntity<FundraiserWithdrawal> constructRequest(final FundraiserWithdrawal fundraiserWithdrawal) {
         return RequestEntity
-                .post(FundraiserWebAdapter.URI)
+                .post(FundraiserWebAdapter.WITHDRAWAL_SERVICE_URI)
                 .accept(MediaType.APPLICATION_JSON)
                 .body(fundraiserWithdrawal);
     }
