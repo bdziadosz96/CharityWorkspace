@@ -3,6 +3,7 @@ package pl.dziadosz.fundsmicroservice.infrastructure.persistence.database.fundra
 import java.math.BigDecimal;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import pl.dziadosz.fundsmicroservice.domain.exception.FundraiserNotFoundException;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.Fundraiser;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.FundraiserEvent;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.port.out.FundraiserRepositoryPort;
@@ -34,6 +35,7 @@ public class FundraiserDatabaseAdapter implements FundraiserRepositoryPort {
                         entity.getAccountId(),
                         entity.getName(),
                         entity.getBalance()));
+
     }
 
     @Override

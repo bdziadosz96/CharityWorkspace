@@ -19,6 +19,7 @@ public class FundraiserRestErrorHandler implements ResponseErrorHandler {
 
     @Override
     public void handleError(final ClientHttpResponse response) throws IOException {
+        System.out.println(response.getStatusCode());
         if (response.getStatusCode()
                 .series() == HttpStatus.Series.SERVER_ERROR) {
             throw new ExternalWithdrawalProcessException(response.getStatusText());

@@ -17,8 +17,10 @@ public class FundraiserWithdrawalAdapter implements FundraiserWithdrawalPort {
     private final FundraiserSaveService fundraiserSaveService;
     private final FundraiserSearchService searchService;
 
-    public FundraiserWithdrawalAdapter(final FundraiserCashService cashService, final FundraiserWebService withdrawalService,
-                                final FundraiserSaveService fundraiserSaveService, final FundraiserSearchService searchService) {
+    public FundraiserWithdrawalAdapter(final FundraiserCashService cashService,
+                                       final FundraiserWebService withdrawalService,
+                                       final FundraiserSaveService fundraiserSaveService,
+                                       final FundraiserSearchService searchService) {
         this.cashService = cashService;
         this.withdrawalService = withdrawalService;
         this.fundraiserSaveService = fundraiserSaveService;
