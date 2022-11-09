@@ -19,8 +19,9 @@ public class WithdrawalController {
 
     @PostMapping("/fundraise")
     public ResponseEntity<FundraiseDto> getPostFundraise(@RequestBody FundraiseDto fundraiseDto) {
-        return ResponseEntity.badRequest().build();
-//        return ResponseEntity.ok(new FundraiseDto(1L,2L,BigDecimal.TEN));
+//        return ResponseEntity.badRequest().build();
+//        return ResponseEntity.internalServerError().build();
+        return ResponseEntity.ok(new FundraiseDto(1L,2L,BigDecimal.TEN));
     }
 
     record FundraiseDto(Long fundraiseId, Long accountId, BigDecimal amount) {

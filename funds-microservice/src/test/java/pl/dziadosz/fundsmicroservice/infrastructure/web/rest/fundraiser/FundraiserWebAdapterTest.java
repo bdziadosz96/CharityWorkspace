@@ -17,6 +17,7 @@ class FundraiserWebAdapterTest {
     private FundraiserWebAdapter webAdapter = new FundraiserWebAdapter(restTemplate);
 
 
+
     @Test
     void shouldReturnResponseWithIdWhenSuccess() {
         FundraiserWithdrawal request = new FundraiserWithdrawal(1L, 1L, "test", BigDecimal.TEN);
