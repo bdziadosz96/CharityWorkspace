@@ -6,6 +6,4 @@ import pl.dziadosz.fundsmicroservice.infrastructure.persistence.database.fundrai
 
 public interface FundraiserRepository extends JpaRepository<FundraiserEntity, Long> {
     Optional<FundraiserEntity> findByIdAndAccountId(Long fundraiserId, Long accountId);
-
-    Optional<FundraiserEntity> findById(Long id);
 }

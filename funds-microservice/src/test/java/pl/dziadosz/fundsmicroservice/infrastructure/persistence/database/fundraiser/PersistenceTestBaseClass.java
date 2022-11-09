@@ -16,7 +16,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @DataJpaTest
 @ContextConfiguration(classes = PersistenceConfiguration.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class PersistenceTestBaseClass {
+public class PersistenceTestBaseClass {
 
     @Autowired
     TestEntityManager testEntityManager;
@@ -24,6 +24,8 @@ class PersistenceTestBaseClass {
     @Container
     private static final PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>("postgres:latest")
             .withDatabaseName("test");
+
+
 
     @DynamicPropertySource
     private static void init(DynamicPropertyRegistry registry){
@@ -37,4 +39,12 @@ class PersistenceTestBaseClass {
         testEntityManager.clear();
     }
 
+
+
+
 }
+
+/*
+README
+DIAGRAM
+ */

@@ -1,9 +1,6 @@
 package pl.dziadosz.fundsmicroservice.infrastructure.application;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,9 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import pl.dziadosz.fundsmicroservice.domain.fundraiser.FundraiserEventType;
 import pl.dziadosz.fundsmicroservice.infrastructure.persistence.database.fundraiser.entity.FundraiserEntity;
-import pl.dziadosz.fundsmicroservice.infrastructure.persistence.database.fundraiser.entity.FundraiserEventEntity;
 import pl.dziadosz.fundsmicroservice.infrastructure.persistence.database.fundraiser.repository.FundraiserEventRepository;
 import pl.dziadosz.fundsmicroservice.infrastructure.persistence.database.fundraiser.repository.FundraiserRepository;
 
@@ -44,14 +39,13 @@ public class FundsMicroserviceApplication implements CommandLineRunner{
         );
 
 
-
-        FundraiserEventEntity event = new FundraiserEventEntity(UUID.randomUUID().toString(),
-                1L,1L,BigDecimal.ONE, FundraiserEventType.WITHDRAWAL);
-
-        FundraiserEventEntity event2 = new FundraiserEventEntity(UUID.randomUUID().toString(),
-                1L,1L,BigDecimal.TEN, FundraiserEventType.WITHDRAWAL);
-
-        eventRepository.saveAll(List.of(event2, event));
-
+        repository.save(save);
+//        FundraiserEventEntity event = new FundraiserEventEntity(UUID.randomUUID().toString(),
+//                1L,1L,BigDecimal.ONE, FundraiserEventType.WITHDRAWAL);
+//
+//        FundraiserEventEntity event2 = new FundraiserEventEntity(UUID.randomUUID().toString(),
+//                1L,1L,BigDecimal.TEN, FundraiserEventType.WITHDRAWAL);
+//
+//        eventRepository.saveAll(List.of(event2, event));
     }
 }

@@ -9,7 +9,6 @@ import pl.dziadosz.fundsmicroservice.domain.fundraiser.service.FundraiserSaveSer
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.service.FundraiserSearchService;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserDeposit;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserEventModel;
-import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserModel;
 
 public class FundraiserDepositAdapter implements FundraiserDepositPort {
     private final FundraiserCashService cashService;

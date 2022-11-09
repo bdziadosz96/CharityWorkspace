@@ -5,10 +5,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
+import pl.dziadosz.fundsmicroservice.domain.exception.ExternalWithdrawalProcessException;
+import pl.dziadosz.fundsmicroservice.domain.fundraiser.port.out.FundraiserWebPort;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiseWithdrawalResponse;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserWithdrawal;
-import pl.dziadosz.fundsmicroservice.domain.fundraiser.port.out.FundraiserWebPort;
-import pl.dziadosz.fundsmicroservice.domain.exception.InternalWithdrawalProcessException;
 
 @RequiredArgsConstructor
 public class FundraiserWebAdapter implements FundraiserWebPort {
@@ -24,7 +24,7 @@ public class FundraiserWebAdapter implements FundraiserWebPort {
                     .exchange(request, FundraiseWithdrawalResponse.class)
                     .getBody();
         } catch (ResourceAccessException e) {
-            throw new InternalWithdrawalProcessException(e.getMessage());
+            throw new ExternalWithdrawalProcessException("Resource access exception");
         }
     }
 
