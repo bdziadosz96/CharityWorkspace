@@ -15,10 +15,12 @@ Use a gradle wrapper for run the system
 ```
 
 ## Testing
-
-```java
-TODO
+Make sure that Docker is installed on your computer.
 ```
+./gradlew test
+```
+In case of missing docker images, please visit my hub or pull bdziadosz96/withdrawalservice and bdziadosz96/paymentservice
+
 ## Data
 For database supply with sample data, use prepared calls in ./api/
 
@@ -27,6 +29,9 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ```
 bartlomiej.dziadosz96@gmail.com
 ```
+
+## Architecture
+![arcitecture diagram](images/diag1.png)
 
 Please make sure to update tests as appropriate.
 

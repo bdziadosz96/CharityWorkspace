@@ -12,6 +12,7 @@ import pl.dziadosz.fundsmicroservice.domain.exception.FundraiserNotFoundExceptio
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.Fundraiser;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.FundraiserEvent;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.FundraiserEventType;
+import pl.dziadosz.fundsmicroservice.domain.fundraiser.FundraiserMapper;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.port.out.FundraiserRepositoryPort;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.service.FundraiserCashService;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.service.FundraiserSaveService;
@@ -24,15 +25,16 @@ import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
 class FundraiserDepositAdapterTest {
-    private FundraiserRepositoryPort repositoryPort = Mockito.mock(FundraiserRepositoryPort.class);
-    private FundraiserCashService cashService = Mockito.mock(FundraiserCashService.class, Mockito.CALLS_REAL_METHODS);
-    private FundraiserSaveService saveService = new FundraiserSaveService(repositoryPort);
-    private FundraiserSearchService searchService = new FundraiserSearchService(repositoryPort);
-    private FundraiserDepositAdapter depositAdapter = new FundraiserDepositAdapter(
+    private final FundraiserRepositoryPort repositoryPort = Mockito.mock(FundraiserRepositoryPort.class);
+    private final FundraiserCashService cashService = Mockito.mock(FundraiserCashService.class, Mockito.CALLS_REAL_METHODS);
+    private final FundraiserSaveService saveService = new FundraiserSaveService(repositoryPort);
+    private final FundraiserSearchService searchService = new FundraiserSearchService(repositoryPort);
+    private final FundraiserMapper fundraiserMapper = new FundraiserMapper();
+    private final FundraiserDepositAdapter depositAdapter = new FundraiserDepositAdapter(
             cashService,
             saveService,
-            searchService
-    );
+            searchService,
+            fundraiserMapper);
 
 
     @Test

@@ -19,22 +19,22 @@ import pl.dziadosz.fundsmicroservice.domain.fundraiser.port.in.FundraiserWithdra
 @RequestMapping("fundraise")
 @RequiredArgsConstructor
 public class FundraiserController {
-    private final FundraiserRestMapper MAPPER;
+    private final FundraiserRestMapper mapper;
     private final FundraiserDepositPort depositPort;
     private final FundraiserWithdrawalPort withdrawalPort;
     private final FundraiserInformationPort informationPort;
 
     @PostMapping("withdraw")
     public FundraiserEventDto withdraw(@RequestBody FundraiserWithdrawalDto fundraiserWithdrawalDto) {
-        FundraiserWithdrawal fundraiserWithdrawal = MAPPER.withdrawalDtoToModel(fundraiserWithdrawalDto);
+        FundraiserWithdrawal fundraiserWithdrawal = mapper.withdrawalDtoToModel(fundraiserWithdrawalDto);
         FundraiserEventModel withdraw = withdrawalPort.withdraw(fundraiserWithdrawal);
-        return MAPPER.eventModelToDto(withdraw);
+        return mapper.eventModelToDto(withdraw);
     }
 
     @PostMapping("deposit")
     public FundraiserEventDto deposit(@RequestBody FundraiserDepositDto fundraiserDepositDto) {
-        FundraiserEventModel deposit = depositPort.deposit(MAPPER.depositDtoModel(fundraiserDepositDto));
-        return MAPPER.eventModelToDto(deposit);
+        FundraiserEventModel deposit = depositPort.deposit(mapper.depositDtoModel(fundraiserDepositDto));
+        return mapper.eventModelToDto(deposit);
     }
 
     @GetMapping("information/{fundraiserId}")

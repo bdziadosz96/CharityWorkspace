@@ -14,13 +14,15 @@ public class FundraiserDepositAdapter implements FundraiserDepositPort {
     private final FundraiserCashService cashService;
     private final FundraiserSaveService fundraiserSaveService;
     private final FundraiserSearchService searchService;
+    private final FundraiserMapper fundraiserMapper;
 
     public FundraiserDepositAdapter(final FundraiserCashService cashService,
                                     final FundraiserSaveService fundraiserSaveService,
-                                    final FundraiserSearchService searchService) {
+                                    final FundraiserSearchService searchService, final FundraiserMapper fundraiserMapper) {
         this.fundraiserSaveService = fundraiserSaveService;
         this.cashService = cashService;
         this.searchService = searchService;
+        this.fundraiserMapper = fundraiserMapper;
     }
 
     @Override
@@ -29,6 +31,6 @@ public class FundraiserDepositAdapter implements FundraiserDepositPort {
         Fundraiser fundraiserAfterDeposit = cashService.makeDeposit(fundraiser, fundraiserDeposit);
         FundraiserEvent fundraiserEventModel = FundraiserEvent.fromDeposit(fundraiserAfterDeposit, fundraiserDeposit.amount());
         FundraiserEvent fundraiserEvent = fundraiserSaveService.combineTransaction(fundraiserAfterDeposit, fundraiserEventModel);
-        return FundraiserMapper.toModel(fundraiserEvent);
+        return fundraiserMapper.toModel(fundraiserEvent);
     }
 }

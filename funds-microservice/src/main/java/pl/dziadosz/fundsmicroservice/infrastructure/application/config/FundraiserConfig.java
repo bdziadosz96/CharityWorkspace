@@ -2,6 +2,7 @@ package pl.dziadosz.fundsmicroservice.infrastructure.application.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import pl.dziadosz.fundsmicroservice.domain.fundraiser.FundraiserMapper;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.adapter.FundraiserDepositAdapter;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.adapter.FundraiserInformationAdapter;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.adapter.FundraiserWithdrawalAdapter;
@@ -24,7 +25,8 @@ public class FundraiserConfig {
         return new FundraiserWithdrawalAdapter(new FundraiserCashService(),
                 new FundraiserWebService(fundraiserWebPort),
                 new FundraiserSaveService(fundraiserRepositoryPort),
-                new FundraiserSearchService(fundraiserRepositoryPort));
+                new FundraiserSearchService(fundraiserRepositoryPort),
+                new FundraiserMapper());
     }
 
     @Bean
@@ -36,6 +38,7 @@ public class FundraiserConfig {
     public FundraiserDepositPort fundraiserDepositPort(FundraiserRepositoryPort fundraiserRepositoryPort) {
         return new FundraiserDepositAdapter(new FundraiserCashService(),
                 new FundraiserSaveService(fundraiserRepositoryPort),
-                new FundraiserSearchService(fundraiserRepositoryPort));
+                new FundraiserSearchService(fundraiserRepositoryPort),
+                new FundraiserMapper());
     }
 }

@@ -10,9 +10,10 @@ class FundraiserMapperTest {
 
     @Test
     void shouldConvertModelToDto() {
+        FundraiserMapper fundraiserMapper = new FundraiserMapper();
         FundraiserEvent event = givenFundraiserEvent();
 
-        FundraiserEventModel result = FundraiserMapper.toModel(event);
+        FundraiserEventModel result = fundraiserMapper.toModel(event);
 
         assertEquals(event.getUuid(), result.uuid());
         assertEquals(event.getFundraiserId(), result.fundraiserId());

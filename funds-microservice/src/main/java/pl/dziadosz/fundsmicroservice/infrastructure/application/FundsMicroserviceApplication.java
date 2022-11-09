@@ -16,30 +16,24 @@ import pl.dziadosz.fundsmicroservice.infrastructure.persistence.database.fundrai
 @EnableJpaRepositories(basePackages = {"pl.dziadosz.fundsmicroservice.infrastructure.persistence.database"})
 @EntityScan(basePackages = "pl.dziadosz.fundsmicroservice.infrastructure.persistence.database")
 @ComponentScan(basePackages = {"pl.dziadosz.fundsmicroservice.infrastructure"})
-public class FundsMicroserviceApplication implements CommandLineRunner{
-
-    @Autowired
-    private FundraiserRepository repository;
-
-    @Autowired
-    private FundraiserEventRepository eventRepository;
+public class FundsMicroserviceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(FundsMicroserviceApplication.class, args);
     }
-
-    @Override
-    public void run(final String... args) {
-        FundraiserEntity save = repository.save(
-                FundraiserEntity.builder()
-                        .accountId(1L)
-                        .balance(BigDecimal.TEN)
-                        .name("hospital-charity")
-                        .build()
-        );
-
-
-        repository.save(save);
+//
+//    @Override
+//    public void run(final String... args) {
+//        FundraiserEntity save = repository.save(
+//                FundraiserEntity.builder()
+//                        .accountId(1L)
+//                        .balance(BigDecimal.TEN)
+//                        .name("hospital-charity")
+//                        .build()
+//        );
+//
+//
+//        repository.save(save);
 //        FundraiserEventEntity event = new FundraiserEventEntity(UUID.randomUUID().toString(),
 //                1L,1L,BigDecimal.ONE, FundraiserEventType.WITHDRAWAL);
 //
@@ -47,5 +41,5 @@ public class FundsMicroserviceApplication implements CommandLineRunner{
 //                1L,1L,BigDecimal.TEN, FundraiserEventType.WITHDRAWAL);
 //
 //        eventRepository.saveAll(List.of(event2, event));
-    }
+
 }
