@@ -38,8 +38,8 @@ public class FundraiserEvent {
         return eventType;
     }
 
-    public static FundraiserEvent fromDeposit(Long fundraiserId, Long accountId, BigDecimal amount) {
-        return new FundraiserEvent(UUID.randomUUID().toString(), fundraiserId, accountId, amount, FundraiserEventType.DEPOSIT);
+    public static FundraiserEvent fromDeposit(Fundraiser fundraiser, BigDecimal amount) {
+        return new FundraiserEvent(UUID.randomUUID().toString(), fundraiser.getId(), fundraiser.getAccountId(), amount, FundraiserEventType.DEPOSIT);
     }
 
     public static FundraiserEvent fromWithdrawal(Long fundraiserId, Long accountId, BigDecimal amount) {

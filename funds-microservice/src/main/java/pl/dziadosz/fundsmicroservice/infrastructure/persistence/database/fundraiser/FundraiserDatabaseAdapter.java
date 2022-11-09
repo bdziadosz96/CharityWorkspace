@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.Fundraiser;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.FundraiserEvent;
 import pl.dziadosz.fundsmicroservice.domain.fundraiser.port.out.FundraiserRepositoryPort;
+import pl.dziadosz.fundsmicroservice.domain.fundraiser.view.FundraiserModel;
 import pl.dziadosz.fundsmicroservice.infrastructure.persistence.database.fundraiser.entity.FundraiserEntity;
 import pl.dziadosz.fundsmicroservice.infrastructure.persistence.database.fundraiser.entity.FundraiserEventEntity;
 import pl.dziadosz.fundsmicroservice.infrastructure.persistence.database.fundraiser.repository.FundraiserEventRepository;
@@ -27,6 +28,16 @@ public class FundraiserDatabaseAdapter implements FundraiserRepositoryPort {
     }
 
     @Override
+    public Optional<FundraiserModel> findFundraiserById(final Long fundraiserId) {
+            return fundraiserRepository.findById(fundraiserId)
+                    .map(entity -> new FundraiserModel(entity.getId(),
+                            entity.getAccountId(),
+                            entity.getName(),
+                            entity.getBalance()));
+
+    }
+
+    @Override
     public BigDecimal findWithdrawalSummary(final Long fundraiserId) {
         return fundraiserEventRepository.findWithdrawalSummaryFor(fundraiserId)
                 .orElse(BigDecimal.ZERO);
@@ -34,7 +45,8 @@ public class FundraiserDatabaseAdapter implements FundraiserRepositoryPort {
 
     @Override
     public BigDecimal findDepositSummary(final Long fundraiserId) {
-        return null;
+        return fundraiserEventRepository.findDepositSummaryFor(fundraiserId)
+                .orElse(BigDecimal.ZERO);
     }
 
     @Override

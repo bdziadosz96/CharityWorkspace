@@ -1,0 +1,7 @@
+version: '3.9'
+
+services:
+  withdrawal-service:
+    image: bdziadosz96/withdrawalservice:latest
+    ports:
+      - "8081:8081"
